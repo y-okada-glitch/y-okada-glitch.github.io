@@ -1,11 +1,959 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <title>My GitHub Pages</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026年度 経済学概論の講義資料配布・課題管理ページ">
+  <title>情報科学演習｜講義資料ポータル</title>
+
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --navy-950: #071a33;
+      --navy-900: #0b2342;
+      --navy-800: #12365f;
+      --navy-700: #1d4f82;
+      --ink: #17283f;
+      --muted: #64748b;
+      --line: #dce5ef;
+      --surface: #f5f8fc;
+      --blue-soft: #eaf3fb;
+      --accent: #f59f42;
+      --danger: #d94f4f;
+      --shadow: 0 18px 45px rgba(18, 54, 95, .10);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--ink);
+      background: var(--surface);
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      letter-spacing: .02em;
+      line-height: 1.8;
+    }
+
+    .topbar {
+      background: var(--navy-950);
+      color: rgba(255, 255, 255, .76);
+      font-size: .78rem;
+      letter-spacing: .05em;
+    }
+
+    .topbar strong {
+      color: #fff;
+    }
+
+    .site-header {
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid rgba(220, 229, 239, .9);
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar-brand {
+      color: var(--navy-900);
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .brand-mark {
+      align-items: center;
+      background: var(--navy-900);
+      border-radius: 12px;
+      color: #fff;
+      display: inline-flex;
+      height: 40px;
+      justify-content: center;
+      margin-right: .65rem;
+      width: 40px;
+    }
+
+    .navbar .nav-link {
+      color: #43566d;
+      font-size: .9rem;
+      font-weight: 600;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .nav-link:focus {
+      color: var(--navy-700);
+    }
+
+    .header-status {
+      align-items: center;
+      background: #f4f7fa;
+      border-radius: 999px;
+      color: #506174;
+      display: inline-flex;
+      font-size: .78rem;
+      gap: .45rem;
+      padding: .38rem .8rem;
+    }
+
+    .status-dot {
+      background: #2eae76;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(46, 174, 118, .12);
+      display: inline-block;
+      height: 7px;
+      width: 7px;
+    }
+
+    .hero {
+      background: var(--navy-900);
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::before,
+    .hero::after {
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 50%;
+      content: "";
+      height: 420px;
+      position: absolute;
+      right: -150px;
+      top: -180px;
+      width: 420px;
+    }
+
+    .hero::after {
+      height: 630px;
+      right: -255px;
+      top: -285px;
+      width: 630px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .breadcrumb {
+      --bs-breadcrumb-divider-color: rgba(255, 255, 255, .35);
+      --bs-breadcrumb-item-active-color: rgba(255, 255, 255, .65);
+      font-size: .78rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, .72);
+      text-decoration: none;
+    }
+
+    .eyebrow {
+      color: #a9cce9;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      margin-bottom: .75rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.45rem);
+      font-weight: 800;
+      letter-spacing: .04em;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .hero-lead {
+      color: rgba(255, 255, 255, .78);
+      font-size: 1rem;
+      max-width: 620px;
+    }
+
+    .professor-note {
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 16px;
+      margin-top: 2rem;
+      max-width: 680px;
+      padding: 1.15rem 1.3rem;
+    }
+
+    .professor-note p {
+      color: rgba(255, 255, 255, .88);
+      font-size: .92rem;
+      margin-bottom: 0;
+    }
+
+    .note-label {
+      color: #f8c98d;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      margin-bottom: .25rem;
+    }
+
+    .hero-actions .btn {
+      border-radius: 9px;
+      font-weight: 700;
+      padding: .72rem 1.1rem;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #2c1c0b;
+    }
+
+    .btn-accent:hover,
+    .btn-accent:focus {
+      background: #ffb35c;
+      border-color: #ffb35c;
+      color: #2c1c0b;
+    }
+
+    .btn-outline-light:hover,
+    .btn-outline-light:focus {
+      color: var(--navy-900);
+    }
+
+    .hero-stats {
+      align-items: stretch;
+      display: flex;
+      gap: 1px;
+      margin-top: 2.5rem;
+      max-width: 530px;
+    }
+
+    .hero-stat {
+      background: rgba(255, 255, 255, .07);
+      flex: 1;
+      padding: .9rem 1rem;
+    }
+
+    .hero-stat:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    .hero-stat:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+
+    .hero-stat .value {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .hero-stat .label {
+      color: rgba(255, 255, 255, .6);
+      display: block;
+      font-size: .7rem;
+      margin-top: .18rem;
+    }
+
+    .section-heading {
+      align-items: end;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-heading h2 {
+      color: var(--navy-900);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      margin-bottom: .25rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: .82rem;
+      margin: 0;
+    }
+
+    .section-kicker {
+      color: var(--navy-700);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .alert-important {
+      background: #fff8ec;
+      border: 1px solid #f6d7a4;
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      color: #61431c;
+      padding: 1rem 1.15rem;
+    }
+
+    .alert-important .alert-icon {
+      align-items: center;
+      background: #fce6c6;
+      border-radius: 10px;
+      color: #b86c14;
+      display: inline-flex;
+      flex: 0 0 38px;
+      height: 38px;
+      justify-content: center;
+      margin-right: .85rem;
+      width: 38px;
+    }
+
+    .alert-important .alert-title {
+      color: #855116;
+      font-size: .88rem;
+      font-weight: 800;
+      margin-bottom: .15rem;
+    }
+
+    .alert-important .alert-text {
+      font-size: .84rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .updated {
+      color: #98734b;
+      font-size: .72rem;
+      white-space: nowrap;
+    }
+
+    .accordion {
+      --bs-accordion-border-color: var(--line);
+      --bs-accordion-btn-focus-box-shadow: 0 0 0 .2rem rgba(29, 79, 130, .12);
+      --bs-accordion-active-bg: #fff;
+      --bs-accordion-active-color: var(--navy-900);
+    }
+
+    .accordion-item {
+      background: #fff;
+      border-radius: 14px !important;
+      box-shadow: 0 5px 18px rgba(18, 54, 95, .04);
+      margin-bottom: .75rem;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 800;
+      gap: .85rem;
+      padding: 1.15rem 1.3rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+      border-bottom: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .session-number {
+      align-items: center;
+      background: var(--blue-soft);
+      border-radius: 9px;
+      color: var(--navy-700);
+      display: inline-flex;
+      flex: 0 0 48px;
+      font-size: .72rem;
+      height: 39px;
+      justify-content: center;
+      letter-spacing: .04em;
+    }
+
+    .session-title {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem .8rem;
+      line-height: 1.45;
+    }
+
+    .session-title small {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 500;
+    }
+
+    .session-body {
+      padding: 1.3rem 1.35rem 1.45rem;
+    }
+
+    .session-description {
+      color: #52657a;
+      font-size: .88rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .material-list {
+      border-top: 1px solid #edf1f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .material-row {
+      align-items: center;
+      border-bottom: 1px solid #edf1f5;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      padding: .95rem 0;
+    }
+
+    .material-info {
+      align-items: center;
+      display: flex;
+      gap: .7rem;
+      min-width: 0;
+    }
+
+    .file-icon {
+      align-items: center;
+      background: #fff0ef;
+      border-radius: 8px;
+      color: var(--danger);
+      display: inline-flex;
+      flex: 0 0 34px;
+      height: 34px;
+      justify-content: center;
+      width: 34px;
+    }
+
+    .material-name {
+      color: var(--ink);
+      display: block;
+      font-size: .84rem;
+      font-weight: 700;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .material-meta {
+      color: var(--muted);
+      display: block;
+      font-size: .7rem;
+      line-height: 1.4;
+      margin-top: .18rem;
+    }
+
+    .download-btn {
+      border-color: #c8d8e8;
+      color: var(--navy-700);
+      flex-shrink: 0;
+      font-size: .78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .download-btn:hover,
+    .download-btn:focus {
+      background: var(--navy-700);
+      border-color: var(--navy-700);
+      color: #fff;
+    }
+
+    .task-box {
+      background: #f8fafc;
+      border: 1px solid #e4ebf2;
+      border-radius: 10px;
+      margin-top: 1.2rem;
+      padding: .9rem 1rem;
+    }
+
+    .task-box.has-task {
+      background: #fffaf4;
+      border-color: #f5dfbd;
+    }
+
+    .task-label {
+      align-items: center;
+      color: #516478;
+      display: flex;
+      font-size: .76rem;
+      font-weight: 800;
+      gap: .45rem;
+      margin-bottom: .25rem;
+    }
+
+    .task-box.has-task .task-label {
+      color: #8b5b20;
+    }
+
+    .task-box p {
+      color: #607286;
+      font-size: .78rem;
+      margin: 0;
+    }
+
+    .badge-task,
+    .badge-none {
+      border-radius: 999px;
+      font-size: .67rem;
+      font-weight: 700;
+      padding: .32rem .65rem;
+    }
+
+    .badge-task {
+      background: #fff0d8;
+      color: #9a5f11;
+    }
+
+    .badge-none {
+      background: #e9f7f0;
+      color: #2c805a;
+    }
+
+    .side-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 1.35rem;
+    }
+
+    .side-card h3 {
+      color: var(--navy-900);
+      font-size: .98rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .course-info {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .course-info li {
+      align-items: flex-start;
+      border-bottom: 1px solid #edf1f5;
+      display: flex;
+      font-size: .8rem;
+      gap: .7rem;
+      padding: .7rem 0;
+    }
+
+    .course-info li:first-child {
+      padding-top: 0;
+    }
+
+    .course-info li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .course-info i {
+      color: var(--navy-700);
+      font-size: 1rem;
+      margin-top: .15rem;
+    }
+
+    .course-info span {
+      color: var(--muted);
+      display: block;
+      font-size: .68rem;
+      line-height: 1.35;
+    }
+
+    .course-info strong {
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .help-card {
+      background: var(--navy-800);
+      border: 0;
+      color: #fff;
+    }
+
+    .help-card h3 {
+      color: #fff;
+    }
+
+    .help-card p {
+      color: rgba(255, 255, 255, .73);
+      font-size: .8rem;
+      line-height: 1.7;
+    }
+
+    .help-card .btn {
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    footer {
+      background: var(--navy-950);
+      color: rgba(255, 255, 255, .64);
+    }
+
+    .footer-brand {
+      color: #fff;
+      font-weight: 800;
+    }
+
+    footer a {
+      color: rgba(255, 255, 255, .72);
+      text-decoration: none;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .footer-note {
+      font-size: .72rem;
+    }
+
+    @media (max-width: 767.98px) {
+      .topbar .container {
+        justify-content: center !important;
+      }
+
+      .header-status {
+        display: none;
+      }
+
+      .hero {
+        padding-bottom: 2.4rem !important;
+        padding-top: 2.4rem !important;
+      }
+
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+
+      .hero-stats {
+        margin-top: 1.8rem;
+      }
+
+      .hero-stat {
+        padding: .7rem .55rem;
+      }
+
+      .hero-stat .value {
+        font-size: 1.1rem;
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: .25rem;
+      }
+
+      .updated {
+        margin-top: .4rem;
+      }
+
+      .material-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: .7rem;
+      }
+
+      .download-btn {
+        margin-left: 2.7rem;
+      }
+
+      .session-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .accordion-button {
+        padding-left: .9rem;
+        padding-right: .9rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Hello, GitHub Pages!</h1>
-    <p>VS Codeから無事に公開できました！</p>
+  <div class="topbar py-2">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span><i class="bi bi-mortarboard-fill me-2"></i>学習サポートポータル</span>
+      <span><strong>2026年度 春学期</strong>　｜　最終更新：2026.04.08</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg" aria-label="メインナビゲーション">
+      <div class="container py-2">
+        <a class="navbar-brand d-flex align-items-center" href="#top">
+          <span class="brand-mark"><i class="bi bi-book-half"></i></span>
+          <span>LECTURE<br><small class="fw-normal text-secondary">資料ポータル</small></span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+          aria-controls="mainNav" aria-expanded="false" aria-label="ナビゲーションを開く">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="#announcements">お知らせ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#materials">講義資料</a></li>
+            <li class="nav-item"><a class="nav-link" href="#course-info">授業について</a></li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+              <span class="header-status"><span class="status-dot"></span>ログイン中：田中 花子</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero py-5">
+      <div class="container hero-content py-md-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#top">ホーム</a></li>
+            <li class="breadcrumb-item"><a href="#materials">2026年度 春学期</a></li>
+            <li class="breadcrumb-item active" aria-current="page">経済学概論</li>
+          </ol>
+        </nav>
+
+        <div class="row align-items-end">
+          <div class="col-lg-8">
+            <div class="eyebrow">Faculty of Economics / Spring 2026</div>
+            <h1>経済学概論</h1>
+            <p class="hero-lead mb-0">経済の見方を身につけ、ニュースの背景にある「なぜ」を読み解くための基礎講義です。授業で使用する資料と課題をこちらで確認できます。</p>
+
+            <div class="professor-note">
+              <div class="note-label"><i class="bi bi-chat-quote-fill me-1"></i>今週の一言 — 佐藤 恒一 教授</div>
+              <p>「身近な商品の値段や、街の変化にも経済学のヒントがあります。まずは観察し、自分の言葉で問いを立ててみましょう。」</p>
+            </div>
+
+            <div class="hero-actions d-flex flex-wrap gap-2 mt-4">
+              <a href="#materials" class="btn btn-accent"><i class="bi bi-folder2-open me-2"></i>講義資料を見る</a>
+              <a href="#announcements" class="btn btn-outline-light"><i class="bi bi-bell me-2"></i>お知らせを確認</a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 d-none d-lg-block">
+            <div class="hero-stats ms-lg-auto">
+              <div class="hero-stat">
+                <span class="value">全14回</span>
+                <span class="label">授業回数</span>
+              </div>
+              <div class="hero-stat">
+                <span class="value">3 / 14</span>
+                <span class="label">公開済み</span>
+              </div>
+              <div class="hero-stat">
+                <span class="value">火曜 2限</span>
+                <span class="label">開講時間</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="announcements" class="py-4 py-md-5">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">IMPORTANT NOTICE</div>
+            <h2>重要なお知らせ</h2>
+            <p>提出期限や授業に関する最新情報</p>
+          </div>
+          <span class="updated"><i class="bi bi-clock me-1"></i>2026年4月8日 更新</span>
+        </div>
+
+        <div class="alert-important d-flex align-items-start" role="alert">
+          <span class="alert-icon"><i class="bi bi-exclamation-lg fs-5"></i></span>
+          <div>
+            <div class="alert-title">第3回リアクションペーパーの提出について</div>
+            <p class="alert-text">第3回の授業後に公開されるフォームから、授業内容へのコメントを提出してください。締切は <strong>4月21日（火）23:59</strong> です。提出前に学籍番号と氏名の入力漏れがないか確認しましょう。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="materials" class="pb-5">
+      <div class="container">
+        <div class="row g-4 g-xl-5">
+          <div class="col-lg-8">
+            <div class="section-heading">
+              <div>
+                <div class="section-kicker">LECTURE MATERIALS</div>
+                <h2>講義資料</h2>
+                <p>各回の資料をダウンロードできます</p>
+              </div>
+              <span class="updated">全3回を公開中</span>
+            </div>
+
+            <div class="accordion" id="lectureAccordion">
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <span class="session-number">第01回</span>
+                    <span class="session-title">ガイダンス：経済学の考え方 <small>2026年4月7日</small></span>
+                  </button>
+                </h3>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#lectureAccordion">
+                  <div class="session-body">
+                    <p class="session-description">経済学が扱うテーマと、データを使って社会を見る基本的な姿勢を紹介します。授業の進め方や成績評価についても説明しています。</p>
+                    <div class="material-list">
+                      <div class="material-row">
+                        <div class="material-info">
+                          <span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+                          <div><span class="material-name">第1回 講義スライド「経済学の入口」</span><span class="material-meta">PDF　｜　2.4 MB　｜　全18ページ</span></div>
+                        </div>
+                        <a class="btn btn-outline-primary btn-sm download-btn" href="#" download="第1回_経済学の入口.pdf"><i class="bi bi-download me-1"></i>PDF</a>
+                      </div>
+                      <div class="material-row">
+                        <div class="material-info">
+                          <span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+                          <div><span class="material-name">シラバス・授業の進め方</span><span class="material-meta">PDF　｜　680 KB　｜　全6ページ</span></div>
+                        </div>
+                        <a class="btn btn-outline-primary btn-sm download-btn" href="#" download="シラバス_経済学概論.pdf"><i class="bi bi-download me-1"></i>PDF</a>
+                      </div>
+                    </div>
+                    <div class="task-box">
+                      <div class="task-label"><i class="bi bi-check2-circle"></i>提出課題 <span class="badge-none">なし</span></div>
+                      <p>第1回は授業内容の確認のみです。次回までにシラバスを一読してください。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    <span class="session-number">第02回</span>
+                    <span class="session-title">市場の仕組み：需要と供給 <small>2026年4月14日</small></span>
+                  </button>
+                </h3>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#lectureAccordion">
+                  <div class="session-body">
+                    <p class="session-description">需要曲線と供給曲線を使い、価格がどのように決まるのかを考えます。身近な商品の値上げを題材に、市場の変化を読み解きます。</p>
+                    <div class="material-list">
+                      <div class="material-row">
+                        <div class="material-info">
+                          <span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+                          <div><span class="material-name">第2回 講義スライド「市場の見えない力」</span><span class="material-meta">PDF　｜　3.1 MB　｜　全24ページ</span></div>
+                        </div>
+                        <a class="btn btn-outline-primary btn-sm download-btn" href="#" download="第2回_市場の見えない力.pdf"><i class="bi bi-download me-1"></i>PDF</a>
+                      </div>
+                      <div class="material-row">
+                        <div class="material-info">
+                          <span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+                          <div><span class="material-name">演習プリント「均衡価格を探そう」</span><span class="material-meta">PDF　｜　420 KB　｜　全3ページ</span></div>
+                        </div>
+                        <a class="btn btn-outline-primary btn-sm download-btn" href="#" download="演習プリント_均衡価格を探そう.pdf"><i class="bi bi-download me-1"></i>PDF</a>
+                      </div>
+                    </div>
+                    <div class="task-box has-task">
+                      <div class="task-label"><i class="bi bi-pencil-square"></i>提出課題 <span class="badge-task">あり</span></div>
+                      <p>演習プリントの問1〜3を解き、4月20日（月）23:59までにLMSへ提出してください。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                    aria-expanded="false" aria-controls="collapseThree">
+                    <span class="session-number">第03回</span>
+                    <span class="session-title">政府の役割：税と公共財 <small>2026年4月21日</small></span>
+                  </button>
+                </h3>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#lectureAccordion">
+                  <div class="session-body">
+                    <p class="session-description">市場だけでは解決しにくい課題に対して、政府はどのような役割を果たすのでしょうか。税金、外部性、公共財をキーワードに考察します。</p>
+                    <div class="material-list">
+                      <div class="material-row">
+                        <div class="material-info">
+                          <span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+                          <div><span class="material-name">第3回 講義スライド「社会を支えるルール」</span><span class="material-meta">PDF　｜　2.8 MB　｜　全21ページ</span></div>
+                        </div>
+                        <a class="btn btn-outline-primary btn-sm download-btn" href="#" download="第3回_社会を支えるルール.pdf"><i class="bi bi-download me-1"></i>PDF</a>
+                      </div>
+                      <div class="material-row">
+                        <div class="material-info">
+                          <span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+                          <div><span class="material-name">参考資料「身近な公共財を考える」</span><span class="material-meta">PDF　｜　1.2 MB　｜　全10ページ</span></div>
+                        </div>
+                        <a class="btn btn-outline-primary btn-sm download-btn" href="#" download="参考資料_身近な公共財を考える.pdf"><i class="bi bi-download me-1"></i>PDF</a>
+                      </div>
+                    </div>
+                    <div class="task-box has-task">
+                      <div class="task-label"><i class="bi bi-pencil-square"></i>提出課題 <span class="badge-task">あり</span></div>
+                      <p>授業後に公開されるリアクションペーパーへ、400字程度で回答してください。締切は4月21日（火）23:59です。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside id="course-info" class="col-lg-4">
+            <div class="side-card mb-4">
+              <h3><i class="bi bi-info-circle me-2 text-primary"></i>授業について</h3>
+              <ul class="course-info">
+                <li><i class="bi bi-person"></i><div><span>担当教員</span><strong>佐藤 恒一 教授</strong></div></li>
+                <li><i class="bi bi-calendar3"></i><div><span>開講日時</span><strong>毎週火曜日 2限（10:40〜12:10）</strong></div></li>
+                <li><i class="bi bi-geo-alt"></i><div><span>教室</span><strong>本館 301教室</strong></div></li>
+                <li><i class="bi bi-award"></i><div><span>単位・対象</span><strong>2単位 / 全学部 1・2年生</strong></div></li>
+              </ul>
+            </div>
+
+            <div class="side-card help-card">
+              <h3><i class="bi bi-question-circle me-2"></i>資料について困ったら</h3>
+              <p>ファイルが開けない、課題の提出方法がわからないなどの場合は、まずよくある質問をご確認ください。</p>
+              <a href="#" class="btn btn-sm btn-outline-light">よくある質問を見る <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+          <div class="footer-brand"><i class="bi bi-book-half me-2"></i>LECTURE 資料ポータル</div>
+          <div class="footer-note mt-1">© 2026 Faculty of Economics. All rights reserved.</div>
+        </div>
+        <div class="d-flex flex-wrap gap-3 footer-note">
+          <a href="#">大学公式サイト</a>
+          <a href="#">学習支援センター</a>
+          <a href="#">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
