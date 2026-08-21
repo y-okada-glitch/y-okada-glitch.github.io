@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>課題提出 | 講義資料ポータル</title>
+  <style>
+    :root { color-scheme: light; --navy:#12365f; --blue:#1769aa; --line:#dbe3ec; --bg:#f4f7fa; --danger:#a52834; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:#182534; background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif; line-height:1.6; }
+    header { color:#fff; background:linear-gradient(135deg,var(--navy),var(--blue)); }
+    header div, main { width:min(920px,calc(100% - 32px)); margin:auto; }
+    header div { padding:28px 0; }
+    header a { color:#fff; }
+    h1 { margin:.2rem 0; font-size:clamp(1.65rem,4vw,2.25rem); }
+    main { padding:28px 0 56px; }
+    .card { padding:clamp(20px,4vw,34px); margin-bottom:24px; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 8px 24px rgba(18,54,95,.06); }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    label { display:block; font-weight:700; }
+    input, select, button { width:100%; margin-top:6px; padding:11px 12px; border:1px solid #aebdcb; border-radius:8px; font:inherit; }
+    input:focus, select:focus { outline:3px solid rgba(23,105,170,.2); border-color:var(--blue); }
+    button { color:#fff; background:var(--blue); border:0; font-weight:700; cursor:pointer; }
+    button:disabled { opacity:.55; cursor:wait; }
+    .full { grid-column:1/-1; }
+    .help { margin:.35rem 0 0; color:#526477; font-size:.9rem; }
+    .status { padding:12px 14px; margin:16px 0 0; border-radius:8px; background:#edf5fb; }
+    .status.error { color:var(--danger); background:#fff0f1; }
+    table { width:100%; border-collapse:collapse; font-size:.93rem; }
+    th, td { padding:10px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { white-space:nowrap; }
+    .table-wrap { overflow-x:auto; }
+    .download { color:var(--blue); font-weight:700; }
+    [hidden] { display:none !important; }
+    @media (max-width:640px) { .grid { grid-template-columns:1fr; } .full { grid-column:auto; } }
+  </style>
+</head>
+<body>
+  <header><div><a href="/">← 講義資料へ戻る</a><h1>課題提出</h1><p>ログインした本人の提出履歴を確認できます。</p></div></header>
+  <main>
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">提出フォーム</h2>
+      <p id="identity">ログイン情報を確認しています…</p>
+      <form id="submission-form" class="grid" enctype="multipart/form-data">
+        <label>課題
+          <select name="assignment" id="assignment" required disabled><option value="">読み込み中…</option></select>
+        </label>
+        <label>学籍番号
+          <input name="studentNumber" maxlength="40" autocomplete="off" required>
+        </label>
+        <label class="full">氏名
+          <input name="studentName" maxlength="100" autocomplete="name" required>
+        </label>
+        <label class="full">提出ファイル
+          <input type="file" name="file" accept=".pdf,.docx,.xlsx,.pptx,.zip" required>
+          <span class="help">PDF・DOCX・XLSX・PPTX・ZIP、25MB以下</span>
+        </label>
+        <div class="full"><button id="submit-button" type="submit" disabled>提出する</button></div>
+      </form>
+      <div id="form-status" class="status" role="status" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="card" aria-labelledby="history-title">
+      <h2 id="history-title">提出履歴</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>提出日時</th><th>課題</th><th>学生</th><th>ファイル</th></tr></thead>
+          <tbody id="submission-list"><tr><td colspan="4">読み込み中…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector("#submission-form");
+    const select = document.querySelector("#assignment");
+    const button = document.querySelector("#submit-button");
+    const statusBox = document.querySelector("#form-status");
+    const list = document.querySelector("#submission-list");
+    const identity = document.querySelector("#identity");
+
+    function showStatus(message, isError = false) {
+      statusBox.textContent = message;
+      statusBox.classList.toggle("error", isError);
+      statusBox.hidden = false;
+    }
+
+    function formatSize(bytes) {
+      return bytes < 1024 * 1024
+        ? `${Math.ceil(bytes / 1024)} KB`
+        : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+    }
+
+    function renderRows(submissions, isAdmin) {
+      list.replaceChildren();
+      if (!submissions.length) {
+        const row = list.insertRow();
+        const cell = row.insertCell();
+        cell.colSpan = 4;
+        cell.textContent = "提出履歴はありません。";
+        return;
+      }
+      for (const item of submissions) {
+        const row = list.insertRow();
+        row.insertCell().textContent = new Date(item.submitted_at).toLocaleString("ja-JP");
+        row.insertCell().textContent = item.assignment;
+        row.insertCell().textContent = isAdmin
+          ? `${item.student_number} ${item.student_name} (${item.email})`
+          : `${item.student_number} ${item.student_name}`;
+        const fileCell = row.insertCell();
+        const link = document.createElement("a");
+        link.className = "download";
+        link.href = `/api/submissions/${encodeURIComponent(item.id)}`;
+        link.textContent = `${item.original_filename} (${formatSize(item.size)})`;
+        fileCell.append(link);
+      }
+    }
+
+    async function loadSubmissions() {
+      const response = await fetch("/api/submissions", { headers: { Accept: "application/json" } });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "提出情報を取得できませんでした。");
+
+      identity.textContent = `${data.user.email} としてログイン中${data.user.isAdmin ? "（管理者）" : ""}`;
+      select.replaceChildren(new Option("課題を選択してください", ""));
+      for (const assignment of data.assignments) select.add(new Option(assignment, assignment));
+      select.disabled = data.assignments.length === 0;
+      button.disabled = data.assignments.length === 0;
+      renderRows(data.submissions, data.user.isAdmin);
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      button.disabled = true;
+      showStatus("アップロードしています。画面を閉じないでください。");
+      try {
+        const response = await fetch("/api/submissions", { method: "POST", body: new FormData(form) });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "提出できませんでした。");
+        form.querySelector('input[type="file"]').value = "";
+        showStatus("提出を受け付けました。提出履歴を確認してください。");
+        await loadSubmissions();
+      } catch (error) {
+        showStatus(error.message || "提出できませんでした。", true);
+      } finally {
+        button.disabled = select.disabled;
+      }
+    });
+
+    loadSubmissions().catch((error) => {
+      identity.textContent = "ログイン情報を確認できません。";
+      list.innerHTML = '<tr><td colspan="4"></td></tr>';
+      list.querySelector("td").textContent = error.message;
+      showStatus(error.message, true);
+    });
+  </script>
+</body>
+</html>
