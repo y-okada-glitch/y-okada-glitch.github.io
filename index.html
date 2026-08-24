@@ -87,6 +87,15 @@
     .course-panel { background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 25px rgba(18,54,95,.06); padding: 1.2rem; }
     .course-panel-title { align-items: center; color: var(--navy-900); display: flex; font-size: 1.05rem; font-weight: 800; justify-content: space-between; margin-bottom: 1rem; }
     .course-panel-title i { color: var(--navy-700); }
+    .course-tabs { position: sticky; top: 88px; }
+    .course-tabs-label { color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .12em; margin-bottom: .6rem; }
+    .course-tabs .nav { gap: .55rem; }
+    .course-tabs .nav-link { align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); display: flex; font-size: .82rem; font-weight: 800; gap: .65rem; min-height: 52px; padding: .7rem .8rem; text-align: left; width: 100%; }
+    .course-tabs .nav-link i { color: var(--navy-700); font-size: 1rem; }
+    .course-tabs .nav-link:hover, .course-tabs .nav-link:focus { border-color: #9db9d3; color: var(--navy-700); }
+    .course-tabs .nav-link.active { background: var(--navy-900); border-color: var(--navy-900); color: #fff; }
+    .course-tabs .nav-link.active i { color: #fff; }
+    .course-tabs .tab-meta { display: block; font-size: .64rem; font-weight: 500; margin-top: .12rem; opacity: .72; }
 
     .accordion { --bs-accordion-border-color: var(--line); --bs-accordion-btn-focus-box-shadow: 0 0 0 .2rem rgba(29,79,130,.12); --bs-accordion-active-bg: #fff; --bs-accordion-active-color: var(--navy-900); }
     .accordion-item { background: #fff; border-radius: 10px !important; margin-bottom: .6rem; overflow: hidden; }
@@ -126,6 +135,13 @@
       .section-heading { align-items: start; flex-direction: column; gap: .25rem; }
       .material-row { align-items: flex-start; flex-direction: column; gap: .6rem; }
       .download-btn { margin-left: 2.4rem; }
+    }
+
+    @media (max-width: 991.98px) {
+      .course-tabs { position: static; }
+      .course-tabs-label { margin-bottom: .45rem; }
+      .course-tabs .nav { flex-direction: row !important; flex-wrap: nowrap; overflow-x: auto; padding-bottom: .2rem; }
+      .course-tabs .nav-link { flex: 0 0 auto; min-width: 180px; width: auto; }
     }
 
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -194,8 +210,8 @@
       <div class="container">
         <div class="section-heading"><div><div class="section-kicker">SUBJECTS</div><h2>科目</h2><p>資料を確認する科目を選択してください</p></div></div>
         <div class="row g-3">
-          <div class="col-md-6"><a href="#information-science" class="subject-card d-block text-decoration-none h-100"><div class="d-flex justify-content-between align-items-start"><span class="subject-icon"><i class="bi bi-cpu fs-5"></i></span><span class="badge-count">第9回〜第14回</span></div><h3>情報科学</h3><p>文章による情報発信、データ収集、確率・統計の基礎から推測統計まで学びます。</p><div class="subject-link">講義資料を見る <i class="bi bi-arrow-right ms-1"></i></div></a></div>
-          <div class="col-md-6"><a href="#information-practice" class="subject-card d-block text-decoration-none h-100"><div class="d-flex justify-content-between align-items-start"><span class="subject-icon"><i class="bi bi-code-square fs-5"></i></span><span class="badge-count">第1回〜第14回</span></div><h3>情報科学演習</h3><p>コンピュータ操作、ネットワーク、文書作成、プレゼンテーション、表計算を実習します。</p><div class="subject-link">講義資料を見る <i class="bi bi-arrow-right ms-1"></i></div></a></div>
+          <div class="col-md-6"><a href="#materials" class="subject-card d-block text-decoration-none h-100" data-course-target="#information-science"><div class="d-flex justify-content-between align-items-start"><span class="subject-icon"><i class="bi bi-cpu fs-5"></i></span><span class="badge-count">第9回〜第14回</span></div><h3>情報科学</h3><p>文章による情報発信、データ収集、確率・統計の基礎から推測統計まで学びます。</p><div class="subject-link">講義資料を見る <i class="bi bi-arrow-right ms-1"></i></div></a></div>
+          <div class="col-md-6"><a href="#materials" class="subject-card d-block text-decoration-none h-100" data-course-target="#information-practice"><div class="d-flex justify-content-between align-items-start"><span class="subject-icon"><i class="bi bi-code-square fs-5"></i></span><span class="badge-count">第1回〜第14回</span></div><h3>情報科学演習</h3><p>コンピュータ操作、ネットワーク、文書作成、プレゼンテーション、表計算を実習します。</p><div class="subject-link">講義資料を見る <i class="bi bi-arrow-right ms-1"></i></div></a></div>
         </div>
       </div>
     </section>
@@ -203,8 +219,10 @@
     <section id="materials" class="pb-5">
       <div class="container">
         <div class="section-heading"><div><div class="section-kicker">LECTURE MATERIALS</div><h2>講義資料</h2><p>各回をクリックすると、概要・PDF・課題を確認できます</p></div></div>
-        <div class="row g-4">
-          <div class="col-xl-6" id="information-science">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-9 order-2 order-lg-1">
+            <div class="tab-content" id="courseTabContent">
+          <div class="tab-pane fade" id="information-science" role="tabpanel" aria-labelledby="science-tab" tabindex="0">
             <div class="course-panel h-100">
               <div class="course-panel-title"><span><i class="bi bi-cpu me-2"></i>情報科学</span><span class="badge-count">第9回〜第14回</span></div>
               <div class="accordion" id="scienceAccordion">
@@ -224,7 +242,7 @@
             </div>
           </div>
 
-          <div class="col-xl-6" id="information-practice">
+          <div class="tab-pane fade show active" id="information-practice" role="tabpanel" aria-labelledby="practice-tab" tabindex="0">
             <div class="course-panel h-100">
               <div class="course-panel-title"><span><i class="bi bi-code-square me-2"></i>情報科学演習</span><span class="badge-count">第1回〜第14回</span></div>
               <div class="accordion" id="practiceAccordion">
@@ -280,6 +298,17 @@
               </div>
             </div>
           </div>
+            </div>
+          </div>
+          <aside class="col-lg-3 order-1 order-lg-2">
+            <div class="course-tabs" aria-label="講義を選択">
+              <div class="course-tabs-label">講義を選ぶ</div>
+              <div class="nav nav-pills flex-column" id="courseTabs" role="tablist" aria-orientation="vertical">
+                <button class="nav-link" id="science-tab" data-bs-toggle="pill" data-bs-target="#information-science" type="button" role="tab" aria-controls="information-science" aria-selected="false"><i class="bi bi-cpu"></i><span>情報科学<span class="tab-meta">第9回〜第14回</span></span></button>
+                <button class="nav-link active" id="practice-tab" data-bs-toggle="pill" data-bs-target="#information-practice" type="button" role="tab" aria-controls="information-practice" aria-selected="true"><i class="bi bi-code-square"></i><span>情報科学演習<span class="tab-meta">第1回〜第14回</span></span></button>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -294,6 +323,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
+    document.querySelectorAll("[data-course-target]").forEach((link) => {
+      link.addEventListener("click", () => {
+        const tabButton = document.querySelector(`[data-bs-target="${link.dataset.courseTarget}"]`);
+        if (tabButton) bootstrap.Tab.getOrCreateInstance(tabButton).show();
+      });
+    });
+
     // index.html の最終更新日時を取得し、表示中の更新日を自動更新します。
     (() => {
       const lastModified = new Date(document.lastModified);
