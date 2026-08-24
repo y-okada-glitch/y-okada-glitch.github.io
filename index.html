@@ -79,10 +79,8 @@
     .subject-card h3 { color: var(--navy-900); font-size: 1.05rem; font-weight: 800; margin: 1rem 0 .25rem; }
     .subject-card p { color: var(--muted); font-size: .8rem; margin: 0; }
     .subject-link { color: var(--navy-700); font-size: .78rem; font-weight: 800; margin-top: 1rem; }
-    .badge-count, .badge-task, .badge-none { border-radius: 999px; font-size: .65rem; font-weight: 700; padding: .28rem .6rem; white-space: nowrap; }
+    .badge-count { border-radius: 999px; font-size: .65rem; font-weight: 700; padding: .28rem .6rem; white-space: nowrap; }
     .badge-count { background: var(--blue-soft); color: var(--navy-700); }
-    .badge-task { background: #fff0d8; color: #9a5f11; }
-    .badge-none { background: #e9f7f0; color: #2c805a; }
 
     .course-panel { background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 25px rgba(18,54,95,.06); padding: 1.2rem; }
     .course-panel-title { align-items: center; color: var(--navy-900); display: flex; font-size: 1.05rem; font-weight: 800; justify-content: space-between; margin-bottom: 1rem; }
@@ -115,11 +113,6 @@
     .material-meta { color: var(--muted); display: block; font-size: .65rem; line-height: 1.4; margin-top: .15rem; }
     .download-btn { border-color: #c8d8e8; color: var(--navy-700); flex-shrink: 0; font-size: .7rem; font-weight: 700; }
     .download-btn:hover, .download-btn:focus { background: var(--navy-700); border-color: var(--navy-700); color: #fff; }
-    .task-box { background: #f8fafc; border: 1px solid #e4ebf2; border-radius: 8px; margin-top: .9rem; padding: .75rem .85rem; }
-    .task-box.has-task { background: #fffaf4; border-color: #f5dfbd; }
-    .task-label { align-items: center; color: #516478; display: flex; font-size: .7rem; font-weight: 800; gap: .4rem; margin-bottom: .2rem; }
-    .has-task .task-label { color: #8b5b20; }
-    .task-box p { color: #607286; font-size: .68rem; line-height: 1.6; margin: 0; }
 
     footer { background: var(--navy-950); color: rgba(255,255,255,.64); }
     .footer-brand { color: #fff; font-weight: 800; }
@@ -200,9 +193,6 @@
           <span class="alert-icon"><i class="bi bi-exclamation-lg fs-5"></i></span>
           <div><div class="alert-title">「情報科学演習」第5回・第6回の講義資料を公開しました</div><p class="alert-text">第5回・第6回の講義資料と演習用ファイル（PDF、Word文書、サンプル写真）を公開しました。下の科目一覧から、必要な資料をダウンロードしてください。</p></div>
         </div>
-        <div class="alert alert-light border d-flex align-items-center mb-0" role="status">
-          <i class="bi bi-info-circle text-primary fs-5 me-3"></i><span class="small">課題の提出期限や変更がある場合は、このページのお知らせで案内します。</span>
-        </div>
       </div>
     </section>
 
@@ -218,7 +208,7 @@
 
     <section id="materials" class="pb-5">
       <div class="container">
-        <div class="section-heading"><div><div class="section-kicker">LECTURE MATERIALS</div><h2>講義資料</h2><p>各回をクリックすると、概要・PDF・課題を確認できます</p></div></div>
+        <div class="section-heading"><div><div class="section-kicker">LECTURE MATERIALS</div><h2>講義資料</h2><p>各回をクリックすると、概要・配付資料を確認できます</p></div></div>
         <div class="row g-4 align-items-start">
           <div class="col-lg-9 order-2 order-lg-1">
             <div class="tab-content" id="courseTabContent">
@@ -228,15 +218,15 @@
               <div class="accordion" id="scienceAccordion">
                 <div class="accordion-item">
                   <h3 class="accordion-header" id="scienceHeading910"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#scienceCollapse910" aria-expanded="true" aria-controls="scienceCollapse910"><span class="session-number">第09・10回</span><span class="session-title">文章・情報発信とデータ収集 <small>2026年6月9日</small></span></button></h3>
-                  <div id="scienceCollapse910" class="accordion-collapse collapse show" aria-labelledby="scienceHeading910" data-bs-parent="#scienceAccordion"><div class="session-body"><p class="session-description"><strong>第9回「文章の作成・情報発信の技法」：</strong>誰に何を伝えるかを意識し、論理的・科学的な文章、スライド、プレゼンテーション、ネットワーク上での情報発信の方法を学びます。<br><strong>第10回「調査や実験によるデータ収集」：</strong>調査・実験の基本的なプロセス、既存情報の収集、研究デザインについて学びます。</p><div class="material-list"><div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">第9・10回 配布資料「文章作成・情報発信／データ収集」</span><span class="material-meta">PDF　｜　2026年6月9日</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="20260609第9,10回_配布用.pdf" download="情報科学_第9・10回.pdf"><i class="bi bi-download me-1"></i>PDF</a></div></div><div class="task-box"><div class="task-label"><i class="bi bi-check2-circle"></i>提出課題 <span class="badge-none">なし</span></div><p>資料内の演習問題を確認し、次回の統計分野に備えてください。</p></div></div></div>
+                  <div id="scienceCollapse910" class="accordion-collapse collapse show" aria-labelledby="scienceHeading910" data-bs-parent="#scienceAccordion"><div class="session-body"><p class="session-description"><strong>第9回「文章の作成・情報発信の技法」：</strong>誰に何を伝えるかを意識し、論理的・科学的な文章、スライド、プレゼンテーション、ネットワーク上での情報発信の方法を学びます。<br><strong>第10回「調査や実験によるデータ収集」：</strong>調査・実験の基本的なプロセス、既存情報の収集、研究デザインについて学びます。</p><div class="material-list"><div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">第9・10回 配布資料「文章作成・情報発信／データ収集」</span><span class="material-meta">PDF　｜　2026年6月9日</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="20260609第9,10回_配布用.pdf" download="情報科学_第9・10回.pdf"><i class="bi bi-download me-1"></i>PDF</a></div></div></div></div>
                 </div>
                 <div class="accordion-item">
                   <h3 class="accordion-header" id="scienceHeading1112"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scienceCollapse1112" aria-expanded="false" aria-controls="scienceCollapse1112"><span class="session-number">第11・12回</span><span class="session-title">統計データ解析（1・2） <small>2026年6月15日</small></span></button></h3>
-                  <div id="scienceCollapse1112" class="accordion-collapse collapse" aria-labelledby="scienceHeading1112" data-bs-parent="#scienceAccordion"><div class="session-body"><p class="session-description"><strong>第11回「確率・統計の考え方」：</strong>記述統計と推測統計、確率、順列・組み合わせ、条件付き確率、確率分布など、統計学の基礎を学びます。<br><strong>第12回「記述統計」：</strong>統計データの種類、度数分布とグラフ、代表値・散布度・パーセンタイル、2変数の記述方法を学びます。</p><div class="material-list"><div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">第11・12回 配布資料「確率・統計／記述統計」</span><span class="material-meta">PDF　｜　2026年6月15日</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="20260609第11,12回_配布用.pdf" download="情報科学_第11・12回.pdf"><i class="bi bi-download me-1"></i>PDF</a></div></div><div class="task-box"><div class="task-label"><i class="bi bi-check2-circle"></i>提出課題 <span class="badge-none">なし</span></div><p>統計の基本用語と計算例を復習してください。実践的な演習は情報科学演習で扱います。</p></div></div></div>
+                  <div id="scienceCollapse1112" class="accordion-collapse collapse" aria-labelledby="scienceHeading1112" data-bs-parent="#scienceAccordion"><div class="session-body"><p class="session-description"><strong>第11回「確率・統計の考え方」：</strong>記述統計と推測統計、確率、順列・組み合わせ、条件付き確率、確率分布など、統計学の基礎を学びます。<br><strong>第12回「記述統計」：</strong>統計データの種類、度数分布とグラフ、代表値・散布度・パーセンタイル、2変数の記述方法を学びます。</p><div class="material-list"><div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">第11・12回 配布資料「確率・統計／記述統計」</span><span class="material-meta">PDF　｜　2026年6月15日</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="20260609第11,12回_配布用.pdf" download="情報科学_第11・12回.pdf"><i class="bi bi-download me-1"></i>PDF</a></div></div></div></div>
                 </div>
                 <div class="accordion-item">
                   <h3 class="accordion-header" id="scienceHeading1314"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#scienceCollapse1314" aria-expanded="false" aria-controls="scienceCollapse1314"><span class="session-number">第13・14回</span><span class="session-title">統計データ解析（3・4） <small>2026年7月1日</small></span></button></h3>
-                  <div id="scienceCollapse1314" class="accordion-collapse collapse" aria-labelledby="scienceHeading1314" data-bs-parent="#scienceAccordion"><div class="session-body"><p class="session-description"><strong>第13回「推測統計の基礎」：</strong>母集団と標本、点推定・区間推定、検定の考え方、推測統計で用いる確率分布を学びます。<br><strong>第14回「推測統計各論」：</strong>信頼区間、母平均・母比率の検定、クロス集計表の検定、相関係数と回帰直線、ノンパラメトリック検定を扱います。</p><div class="material-list"><div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">第13・14回 講義資料「推測統計の基礎・各論」</span><span class="material-meta">PDF　｜　2026年7月1日</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="20260707第13_14回.pdf" download="情報科学_第13・14回.pdf"><i class="bi bi-download me-1"></i>PDF</a></div></div><div class="task-box"><div class="task-label"><i class="bi bi-check2-circle"></i>提出課題 <span class="badge-none">なし</span></div><p>推測統計の用語と、検定結果の読み取り方を確認してください。</p></div></div></div>
+                  <div id="scienceCollapse1314" class="accordion-collapse collapse" aria-labelledby="scienceHeading1314" data-bs-parent="#scienceAccordion"><div class="session-body"><p class="session-description"><strong>第13回「推測統計の基礎」：</strong>母集団と標本、点推定・区間推定、検定の考え方、推測統計で用いる確率分布を学びます。<br><strong>第14回「推測統計各論」：</strong>信頼区間、母平均・母比率の検定、クロス集計表の検定、相関係数と回帰直線、ノンパラメトリック検定を扱います。</p><div class="material-list"><div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">第13・14回 講義資料「推測統計の基礎・各論」</span><span class="material-meta">PDF　｜　2026年7月1日</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="20260707第13_14回.pdf" download="情報科学_第13・14回.pdf"><i class="bi bi-download me-1"></i>PDF</a></div></div></div></div>
                 </div>
               </div>
             </div>
@@ -253,7 +243,7 @@
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">アウトライン「基本操作・ネットワークの仕組みと基本」</span><span class="material-meta">PDF　｜　授業の予定・到達目標・演習内容</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260714_01_02/20260714情報科学演習0102（基本操作・ネットワークの仕組みと基本）.pdf" download="20260714情報科学演習0102（基本操作・ネットワークの仕組みと基本）.pdf"><i class="bi bi-download me-1"></i>PDF</a></div>
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">講義スライド「情報科学演習0102」</span><span class="material-meta">PDF　｜　講義中の投影資料</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260714_01_02/2026情報科学演習0102.pdf" download="2026情報科学演習0102.pdf"><i class="bi bi-download me-1"></i>PDF</a></div>
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-image-fill"></i></span><div><span class="material-name">参考画像「ジオタグの具体例」</span><span class="material-meta">JPG　｜　講義中に紹介した画像</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260714_01_02/IMG_7459.jpg" download="IMG_7459.jpg"><i class="bi bi-download me-1"></i>画像</a></div>
-                    </div><div class="task-box"><div class="task-label"><i class="bi bi-check2-circle"></i>演習課題 <span class="badge-none">なし</span></div><p>第1・2回は資料の確認と、コンピュータ・ネットワークの基本操作の理解が中心です。</p></div></div></div>
+                    </div></div></div>
                 </div>
 
                 <div class="accordion-item">
@@ -263,7 +253,7 @@
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">20260721情報科学演習0304.pdf</span><span class="material-meta">PDF・約3.1MB・講義資料</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260721_03_04/20260721情報科学演習0304.pdf" download="20260721情報科学演習0304.pdf"><i class="bi bi-download me-1"></i>PDF</a></div>
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">20260721情報科学演習0304_アウトライン.pdf</span><span class="material-meta">PDF・約114KB・配布用資料</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260721_03_04/20260721情報科学演習0304_アウトライン.pdf" download="20260721情報科学演習0304_アウトライン.pdf"><i class="bi bi-download me-1"></i>PDF</a></div>
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-text-fill"></i></span><div><span class="material-name">links.html</span><span class="material-meta">HTML・関連リンク</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260721_03_04/links.html" download="links.html"><i class="bi bi-download me-1"></i>HTML</a></div>
-                    </div><div class="task-box"><div class="task-label"><i class="bi bi-check2-circle"></i>講義資料・課題 <span class="badge-none">なし</span></div><p>第3回・第4回の資料を確認し、講義で使用するファイルを必要に応じてダウンロードしてください。</p></div></div></div>
+                    </div></div></div>
                 </div>
 
                 <div class="accordion-item">
@@ -273,7 +263,7 @@
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-pdf-fill"></i></span><div><span class="material-name">20260901情報科学演習0506配付資料.pdf</span><span class="material-meta">PDF・講義配付資料</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260901_05_06/20260901情報科学演習0506配付資料.pdf" download="20260901情報科学演習0506配付資料.pdf"><i class="bi bi-download me-1"></i>PDF</a></div>
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-word-fill"></i></span><div><span class="material-name">テキストp44.docx</span><span class="material-meta">Word・演習用文書</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260901_05_06/テキストp44.docx" download="テキストp44.docx"><i class="bi bi-download me-1"></i>Word</a></div>
                       <div class="material-row"><div class="material-info"><span class="file-icon"><i class="bi bi-file-earmark-zip-fill"></i></span><div><span class="material-name">サンプル写真.zip</span><span class="material-meta">ZIP・文書作成演習用の写真素材</span></div></div><a class="btn btn-outline-primary btn-sm download-btn" href="情報科学演習/20260901_05_06/サンプル写真.zip" download="サンプル写真.zip"><i class="bi bi-download me-1"></i>ZIP</a></div>
-                    </div><div class="task-box"><div class="task-label"><i class="bi bi-check2-circle"></i>演習課題 <span class="badge-none">なし</span></div><p>配付資料を確認し、演習用文書とサンプル写真を授業で使用できるようダウンロードしてください。</p></div></div></div>
+                    </div></div></div>
                 </div>
 
                 <div class="accordion-item">
